@@ -83,10 +83,80 @@
   <div class="malla" id="malla"></div>
 
   <script>
-    const ramos = [ /* 👇 LOS RAMOS ESTÁN EN UN COMENTARIO SEPARADO PARA AHORRAR ESPACIO
-    Puedes pedirme que te los vuelva a pegar aquí si los necesitas completos
-    Incluyen los 10 semestres y prerrequisitos ya configurados como hicimos antes
-    */ ];
+    const ramos = [
+  { semestre: 1, asignaturas: [
+    { nombre: "Álgebra y trigonometría", id: "algTrig" },
+    { nombre: "Geometría en el plano y el espacio", id: "geomPlano" },
+    { nombre: "Introducción a la pedagogía en matemática y computación", id: "introPed" },
+    { nombre: "Comunicación oral y escrita", id: "comOral" },
+    { nombre: "Inglés I", id: "ing1" }
+  ]},
+  { semestre: 2, asignaturas: [
+    { nombre: "Cálculo", id: "calculo", req: ["algTrig"] },
+    { nombre: "Álgebra lineal", id: "algLineal", req: ["algTrig", "geomPlano"] },
+    { nombre: "Programación de computadores", id: "prog", req: ["introPed"] },
+    { nombre: "Didáctica de la matemática", id: "didMate" },
+    { nombre: "Sociología y antropología de la educación", id: "socAnt", req: ["introPed"] },
+    { nombre: "Inglés II", id: "ing2", req: ["ing1"] }
+  ]},
+  { semestre: 3, asignaturas: [
+    { nombre: "Cálculo diferencial e integral en una variable", id: "calculo1", req: ["calculo"] },
+    { nombre: "Geometría vectorial", id: "geomVect", req: ["algLineal"] },
+    { nombre: "Programación avanzada con estructuras de datos", id: "progAdv", req: ["prog"] },
+    { nombre: "Psicología del aprendizaje", id: "psico", req: ["socAnt"] },
+    { nombre: "Práctica I: Identidad profesional", id: "prac1", req: ["socAnt"] }
+  ]},
+  { semestre: 4, asignaturas: [
+    { nombre: "Cálculo diferencial e integral en varias variables", id: "calculo2", req: ["calculo1"] },
+    { nombre: "Estructuras algebraicas", id: "estrucAlg", req: ["algLineal"] },
+    { nombre: "Sistemas operativos", id: "sisOp", req: ["progAdv"] },
+    { nombre: "Didáctica de la geometría", id: "didGeom", req: ["didMate"] },
+    { nombre: "Desarrollo curricular", id: "desCur", req: ["psico"] },
+    { nombre: "Inglés III", id: "ing3", req: ["ing2"] }
+  ]},
+  { semestre: 5, asignaturas: [
+    { nombre: "Electivo de matemática", id: "electMat", req: ["calculo1"] },
+    { nombre: "Estadística descriptiva y probabilidad", id: "estad1", req: ["calculo2"] },
+    { nombre: "Redes de computadoras y aplicaciones móviles", id: "redes", req: ["sisOp"] },
+    { nombre: "Didáctica del álgebra", id: "didAlg", req: ["algLineal", "didMate"] },
+    { nombre: "Inglés IV", id: "ing4", req: ["ing3"] },
+    { nombre: "Práctica II: diversidad e inclusión", id: "prac2", req: ["prac1"] }
+  ]},
+  { semestre: 6, asignaturas: [
+    { nombre: "Modelamiento y ecuaciones diferenciales", id: "model", req: ["calculo2"] },
+    { nombre: "Estadística inferencial", id: "estad2", req: ["estad1"] },
+    { nombre: "Base de datos educativos", id: "bdd", req: ["sisOp"] },
+    { nombre: "Didáctica del cálculo", id: "didCalc", req: ["calculo2", "didMate"] },
+    { nombre: "Evaluación de los aprendizajes", id: "eval", req: ["desCur"] }
+  ]},
+  { semestre: 7, asignaturas: [
+    { nombre: "Fundamentos de la matemática", id: "fundMate", req: ["electMat", "estrucAlg"] },
+    { nombre: "Didáctica de la computación", id: "didComp", req: ["redes"] },
+    { nombre: "Historia y epistemología de la matemática", id: "histEp", req: ["didAlg", "didCalc"] },
+    { nombre: "Inclusión educativa y formación ciudadana", id: "inclusion", req: ["prac2"] },
+    { nombre: "Diseño de investigación en educación matemática y computación", id: "disenio", req: ["eval"] },
+    { nombre: "Práctica III: evaluación docente", id: "prac3", req: ["prac2"] }
+  ]},
+  { semestre: 8, asignaturas: [
+    { nombre: "Matemática financiera", id: "finanzas", req: ["estad1"] },
+    { nombre: "Electivo I", id: "elect1", req: ["electMat", "estad1", "redes", "didAlg", "ing4", "prac2"] },
+    { nombre: "Enseñanza y aprendizaje en espacios virtuales", id: "virtual", req: ["didComp"] },
+    { nombre: "Didáctica de la estadística", id: "didEst" },
+    { nombre: "Gestión educativa y convivencia escolar", id: "gestion", req: ["inclusion"] },
+    { nombre: "Metodología de la investigación educativa", id: "metodo", req: ["disenio"] }
+  ]},
+  { semestre: 9, asignaturas: [
+    { nombre: "Electivo II", id: "elect2", req: ["model", "estad2", "bdd", "didCalc", "eval"] },
+    { nombre: "Electivo III", id: "elect3", req: ["model", "estad2", "bdd", "didCalc", "eval"] },
+    { nombre: "Taller de educación matemática y computación", id: "taller", req: ["histEp", "prac3"] },
+    { nombre: "Seminario de título", id: "semi1", req: ["metodo"] },
+    { nombre: "Práctica IV: Trabajo colaborativo", id: "prac4", req: ["prac3"] }
+  ]},
+  { semestre: 10, asignaturas: [
+    { nombre: "Seminario de título II", id: "semi2", req: ["semi1"] },
+    { nombre: "Práctica V: desarrollo profesional docente", id: "prac5", req: ["prac4"] }
+  ]}
+];
 
     const completados = new Set(JSON.parse(localStorage.getItem('completados')) || []);
     const container = document.getElementById('malla');
